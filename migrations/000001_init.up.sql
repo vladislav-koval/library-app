@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS books (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(128) NOT NULL,
+    author VARCHAR(128) NOT NULL,
+    total_pages INTEGER NOT NULL,
+    read BOOLEAN NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    read_at TIMESTAMP
+);

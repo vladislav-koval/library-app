@@ -1,20 +1,20 @@
-package libraryhttp
+package book_http
 
 import (
 	"encoding/json"
 	"errors"
-	"homework/library"
+	"homework/book"
 	"net/http"
 	"time"
 )
 
 func statusFromError(err error) int {
 	switch {
-	case errors.As(err, &ValidationError{}):
+	case errors.As(err, &book.ValidationError{}):
 		return http.StatusBadRequest
-	case errors.Is(err, library.ErrBookNotFound):
+	case errors.Is(err, book.ErrBookNotFound):
 		return http.StatusNotFound
-	case errors.Is(err, library.ErrBookAlreadyExists):
+	case errors.Is(err, book.ErrBookAlreadyExists):
 		return http.StatusConflict
 	default:
 		return http.StatusInternalServerError
@@ -22,7 +22,7 @@ func statusFromError(err error) int {
 }
 
 func WriteError(w http.ResponseWriter, statusCode int, err error) {
-	errDto := ErrorDto{
+	errDto := book.ErrorDto{
 		Message: err.Error(),
 		Time:    time.Now(),
 	}
